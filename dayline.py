@@ -13,7 +13,6 @@ def buildGraph(fileout):
     year = `today.year`
     month = `today.month`
     day = `today.day`
-    day = "17"
     minutes = [0]*24*60
     
     for minute in range(0,24*60):
