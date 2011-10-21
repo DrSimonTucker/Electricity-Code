@@ -34,10 +34,11 @@ def buildGraph(fileouts):
         lefts = np.arange(7)
         b1 = matplotlib.pyplot.bar(lefts,hours)
     
-        matplotlib.pyplot.title("Usage between " + timezones[i][0] + ":00 and " + timezones[i][1] + ":00")
+        matplotlib.pyplot.title("Usage between " + timezones[i][0] + ":00 and " + timezones[i][1] + ":59")
         matplotlib.pyplot.xlabel('Days Previous')
         matplotlib.pyplot.ylabel('Average Watts Used')
         matplotlib.pyplot.xticks((lefts+0.4),days)
+        matplotlib.pyplot.plot([0,lefts[-1]],[hours[-1],hours[-1]],'r')
         matplotlib.pyplot.savefig(fileouts[i])
 
 buildGraph(['t1.png','t2.png','t3.png'])

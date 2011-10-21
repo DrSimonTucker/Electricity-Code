@@ -36,6 +36,7 @@ def buildGraph(fileout):
     matplotlib.pyplot.xlabel('Days Previous')
     matplotlib.pyplot.ylabel('Average Watts Used')
     matplotlib.pyplot.xticks((lefts+0.4),days)
+    matplotlib.pyplot.plot([0,lefts[-1]],[hours[-1],hours[-1]],'r')    
     matplotlib.pyplot.savefig(fileout)
 
 buildGraph('days.png')
