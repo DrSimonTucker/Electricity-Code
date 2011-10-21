@@ -23,7 +23,6 @@ def buildGraph(fileout):
         start = year + "-" + month + "-" + day + " 00:00:00"
         end = year + "-" + month + "-" + day + " 23:59:59"
         query = "select sum(watts)/count(watts) from leccy where sensor = 0 AND dt > '"+start+"' and dt < '"+end+"'"
-        print query
         
         res = pgr.query(query)
         if res.getresult()[0][0] != None:
