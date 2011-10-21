@@ -8,27 +8,27 @@ def buildGraph(fileout):
 
     matplotlib.pyplot.clf()
 
-    today = date.today()
+    today = date.today() - timedelta(1)
 
     year = `today.year`
     month = `today.month`
-    day = "17"
-    hours = []
+    day = `today.day`
+    hours = [0]*24
     for hour in range(0,24):
 
         start = year + "-" + month + "-" + day + " " + `hour` + ":00"
         end = year + "-" + month + "-" + day + " " + `hour+1` + ":00"
         query = "select sum(watts)/count(watts) from leccy where sensor = 0 AND dt > '"+start+"' and dt < '"+end+"'"
 
-        print query
         res = pgr.query(query)
-        hours.append(res.getresult()[0][0])
+        if res.getresult()[0][0] != None:
+            hours[hour] = res.getresult()[0][0]
 
-    hours2 = []
-    yesterday = date.today() - timedelta(1)
+    hours2 = [0]*24
+    yesterday = date.today() - timedelta(2)
     year2 = `yesterday.year`
     month2 = `yesterday.month`
-    day2 = "16"
+    day2 = `yesterday.day`
     for hour in range(0,24):
 
         start = year2 + "-" + month2 + "-" + day2 + " " + `hour` + ":00"
@@ -36,25 +36,23 @@ def buildGraph(fileout):
         query = "select sum(watts)/count(watts) from leccy where sensor = 0 AND dt > '"+start+"' and dt < '"+end+"'"
 
         res = pgr.query(query)
-        hours2.append(res.getresult()[0][0])
+        if res.getresult()[0][0] != None:
+            hours2[hour] = res.getresult()[0][0]
 
     hours3 = [9999999]*24
-    for val in range(2,8):
+    for val in range(3,9):
 
         day = date.today() - timedelta(val)
 
         year3 = `day.year`
         month3 = `day.month`
-        day3 = `17-val`
-
-        print day3
+        day3 = `day.day`
 
         for hour in range(0,24):
 
             start = year3 + "-" + month3 + "-" + day3 + " " + `hour` + ":00"
             end = year3 + "-" + month3 + "-" + day3 + " " + `hour+1` + ":00"
             query = "select sum(watts)/count(watts) from leccy where sensor = 0 AND dt > '"+start+"' and dt < '"+end+"'"
-            print "HERE",day3,query
 
             res = pgr.query(query)
             if len(res.getresult()) > 0:
@@ -63,8 +61,6 @@ def buildGraph(fileout):
                     if use < hours3[hour]:
                         hours3[hour] = use
 
-
-    print hours,hours2,hours3
 
     lefts = np.arange(24*4)
     b1 = matplotlib.pyplot.bar(lefts[2::4],hours)
