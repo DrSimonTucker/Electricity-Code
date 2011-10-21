@@ -33,7 +33,7 @@ def buildGraph(fileout):
         if res.getresult()[0][0] != None:
             minutes[minute] = res.getresult()[0][0]
 
-    lefts = np.arange(24*60)
+    lefts = np.arange(24*60)/60.0
 
     b3 = matplotlib.pyplot.plot(lefts,minutes)
     
