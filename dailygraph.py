@@ -40,7 +40,7 @@ def buildGraph(fileout):
             hours2[hour/4] = res.getresult()[0][0]
 
     hours3 = [9999999]*6
-    for val in range(3,9):
+    for val in range(1,8):
 
         day = date.today() - timedelta(val)
 
@@ -58,8 +58,7 @@ def buildGraph(fileout):
             if len(res.getresult()) > 0:
                 use = res.getresult()[0][0]
                 if use != None:
-                    if use < hours3[hour/4]:
-                        hours3[hour/4] = use
+                    hours3[hour/4] += use/7.0
 
 
     lefts = np.arange(6*4)
