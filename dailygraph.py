@@ -39,7 +39,7 @@ def buildGraph(fileout):
         if res.getresult()[0][0] != None:
             hours2[hour/4] = res.getresult()[0][0]
 
-    hours3 = [9999999]*6
+    hours3 = [0]*6
     for val in range(1,8):
 
         day = date.today() - timedelta(val)
@@ -60,7 +60,7 @@ def buildGraph(fileout):
                 if use != None:
                     hours3[hour/4] += use/7.0
 
-
+    print hours3
     lefts = np.arange(6*4)
     b1 = matplotlib.pyplot.bar(lefts[2::4],hours)
     b2 = matplotlib.pyplot.bar(lefts[1::4],hours2,color='red')
@@ -72,4 +72,4 @@ def buildGraph(fileout):
     matplotlib.pyplot.legend((b1[0],b2[0],b3[0]),('Yesterday','2 Days Ago','Week Best'))
     matplotlib.pyplot.savefig(fileout)
 
-buildGraph('tester.png')
+buildGraph('daily.png')
