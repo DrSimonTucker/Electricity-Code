@@ -69,7 +69,7 @@ def buildGraph(fileout):
     matplotlib.pyplot.xlabel('Hour of Day')
     matplotlib.pyplot.ylabel('Average Watts Used')
     matplotlib.pyplot.xticks(lefts[1::4],('0-4','4-8','8-12','12-16','16-20','20-00'))
-    matplotlib.pyplot.legend((b1[0],b2[0],b3[0]),('Yesterday','2 Days Ago','Week Best'))
+    matplotlib.pyplot.legend((b1[0],b2[0],b3[0]),('Yesterday','2 Days Ago','Week Average'))
     matplotlib.pyplot.savefig(fileout)
 
 buildGraph('daily.png')
