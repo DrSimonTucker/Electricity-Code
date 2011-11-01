@@ -38,7 +38,7 @@ def buildGraph(fileout):
     
     matplotlib.pyplot.xlabel('Hour of Day')
     matplotlib.pyplot.ylabel('Average Watts Used')
-    matplotlib.pyplot.title('Daily Useage')
+    matplotlib.pyplot.title('Yesterdays Use')
     matplotlib.pyplot.savefig(fileout)
 
 buildGraph('dayplot.png')
